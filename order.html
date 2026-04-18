@@ -1,120 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Now - Modern E-Commerce</title>
-    <meta name="description" content="Place your order securely.">
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Now - Modern E-Commerce</title>
+  <meta name="description" content="Place your order securely.">
+  <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
-    <!-- Header & Navbar -->
-    <header>
-      <div class="container navbar">
-        <a href="index.html" class="logo">E<span>Shop</span></a>
-        <ul class="nav-links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="products.html">Our Product</a></li>
-          <li><a href="order.html">Order Now</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-        <div class="hamburger">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </div>
-    </header>
-
-    <!-- Mobile Menu & Overlay -->
-    <div class="overlay"></div>
-    <div class="mobile-menu">
-      <div class="mobile-menu-header">
-        <span class="logo">E<span>Shop</span></span>
-        <span class="close-menu">&times;</span>
-      </div>
-      <ul class="mobile-nav-links">
+  <!-- Header & Navbar -->
+  <header>
+    <div class="container navbar">
+      <a href="index.html" class="logo">E<span>Shop</span></a>
+      <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About Us</a></li>
         <li><a href="products.html">Our Product</a></li>
         <li><a href="order.html">Order Now</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </div>
+  </header>
 
-    <!-- Order Section -->
-    <section class="container" style="min-height: 60vh;">
-        <div class="form-container">
-            <h2 class="section-title" style="margin-top: 0; text-align: center;">Place Your Order</h2>
-            <form id="orderForm">
-                <div class="form-group">
-                    <label for="fullName">Full Name</label>
-                    <input type="text" id="fullName" class="form-control" required placeholder="Enter your full name">
-                </div>
-                <div class="form-group">
-                    <label for="mobileNumber">Mobile Number</label>
-                    <input type="tel" id="mobileNumber" class="form-control" required placeholder="Enter 10-digit mobile number" pattern="[0-9]{10}">
-                </div>
-                <div class="form-group">
-                    <label for="address">Full Address (with City, State, Pincode)</label>
-                    <textarea id="address" class="form-control" rows="3" required placeholder="123 Street Name, City, State, 123456"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="productName">Product Name</label>
-                    <input type="text" id="productName" class="form-control" required placeholder="Name of the product" readonly style="background-color: #f9f9f9;">
-                </div>
-                <div class="form-group">
-                    <label for="quantity">Quantity</label>
-                    <input type="number" id="quantity" class="form-control" required min="1" value="1">
-                </div>
-                <button type="submit" class="btn" style="width: 100%; margin-top: 1rem;">Confirm Order</button>
-            </form>
-        </div>
-    </section>
+  <!-- Mobile Menu & Overlay -->
+  <div class="overlay"></div>
+  <div class="mobile-menu">
+    <div class="mobile-menu-header">
+      <span class="logo">E<span>Shop</span></span>
+      <span class="close-menu">&times;</span>
+    </div>
+    <ul class="mobile-nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="products.html">Our Product</a></li>
+      <li><a href="order.html">Order Now</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
 
-    <!-- Footer -->
-    <footer>
-      <div class="container footer-grid">
-        <div class="footer-col">
-          <h3>About</h3>
-          <div class="footer-links">
-            <a href="about.html">About Us</a>
-            <a href="#">Careers</a>
-            <a href="#">Press</a>
-          </div>
+  <!-- Order Section -->
+  <section class="container" style="min-height: 60vh;">
+    <div class="form-container">
+      <h2 class="section-title" style="margin-top: 0; text-align: center;">Place Your Order</h2>
+
+      <!-- Product Preview Image -->
+      <div id="productPreview" style="text-align: center; margin-bottom: 1.5rem; display: none;">
+        <img id="selectedProductImg" src="" alt="Selected Product"
+          style="max-width: 250px; width: 100%; border-radius: 12px; box-shadow: var(--shadow-md); border: 2px solid var(--border-color);">
+      </div>
+
+      <form id="orderForm">
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" class="form-control" required placeholder="Enter your full name">
         </div>
-        <div class="footer-col">
-          <h3>Help</h3>
-          <div class="footer-links">
-            <a href="#">Payments</a>
-            <a href="#">Shipping</a>
-            <a href="#">Cancellation & Returns</a>
-          </div>
+        <div class="form-group">
+          <label for="mobileNumber">Mobile Number</label>
+          <input type="tel" id="mobileNumber" class="form-control" required placeholder="Enter 10-digit mobile number"
+            pattern="[0-9]{10}">
         </div>
-        <div class="footer-col">
-          <h3>Policy</h3>
-          <div class="footer-links">
-            <a href="#">Return Policy</a>
-            <a href="#">Terms of Use</a>
-            <a href="#">Security</a>
-          </div>
+        <div class="form-group">
+          <label for="address">Full Address (with City, State, Pincode)</label>
+          <textarea id="address" class="form-control" rows="3" required
+            placeholder="123 Street Name, City, State, 123456"></textarea>
         </div>
-        <div class="footer-col">
-          <h3>Contact Us</h3>
-          <div class="footer-links">
-            <a href="contact.html">Contact Page</a>
-            <span>Email: support@eshop.com</span>
-            <span>Phone: 1800 202 9898</span>
-          </div>
+        <div class="form-group">
+          <label for="productName">Product Name</label>
+          <input type="text" id="productName" class="form-control" required placeholder="Name of the product" readonly
+            style="background-color: #f9f9f9;">
+        </div>
+        <div class="form-group">
+          <label for="quantity">Quantity</label>
+          <input type="number" id="quantity" class="form-control" required min="1" value="1">
+        </div>
+        <div class="form-group">
+          <label for="paymentMethod">Payment Method</label>
+          <select id="paymentMethod" class="form-control" required>
+            <option value="" disabled selected>Select Payment Method</option>
+            <option value="bitcoin">Bitcoin (BTC)</option>
+            <option value="usdt_trc20">USDT (TRC20)</option>
+            <option value="usdt_erc20">USDT (ERC20)</option>
+            <option value="crypto">Other Cryptocurrency</option>
+          </select>
+        </div>
+
+        <!-- Payment Image Display (QR Codes) -->
+        <div id="paymentImageContainer" style="text-align: center; margin-top: 1rem; display: none; background: #f4f4f4; padding: 1rem; border-radius: 8px; border: 1px dashed #ccc;">
+            <p style="margin-bottom: 0.5rem; font-weight: 600; color: #333;">Scan QR Code to Pay:</p>
+            <img id="paymentQR" src="" alt="Payment QR Code" style="max-width: 250px; width: 100%; border-radius: 8px; box-shadow: var(--shadow-sm);">
+            <p id="paymentAddressNote" style="margin-top: 0.5rem; font-size: 0.9rem; color: #666; word-break: break-all; font-family: monospace; background: #eee; padding: 5px; border-radius: 4px;"></p>
+        </div>
+        <!-- Payment Proof Fields (TXID & Screenshot) -->
+        <div id="cryptoProofFields" style="display: none; margin-top: 1rem; border-top: 1px solid #eee; padding-top: 1rem;">
+            <div class="form-group">
+                <label for="transactionId">Transaction ID (TXID)</label>
+                <input type="text" id="transactionId" class="form-control" placeholder="Paste your transaction hash here">
+            </div>
+            <div class="form-group">
+                <label for="paymentScreenshot">Upload Payment Screenshot</label>
+                <input type="file" id="paymentScreenshot" class="form-control" accept="image/*">
+                <small style="color: #666;">(Optional but recommended for faster verification)</small>
+            </div>
+        </div>
+
+        <button type="submit" class="btn" style="width: 100%; margin-top: 1rem;">Confirm Order</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <h3>About</h3>
+        <div class="footer-links">
+          <a href="about.html">About Us</a>
+          <a href="#">Careers</a>
+          <a href="#">Press</a>
         </div>
       </div>
-      <div class="footer-bottom">
-        &copy; 2026 EShop E-Commerce. All Rights Reserved.
+      <div class="footer-col">
+        <h3>Help</h3>
+        <div class="footer-links">
+          <a href="#">Payments</a>
+          <a href="#">Shipping</a>
+          <a href="#">Cancellation & Returns</a>
+        </div>
       </div>
-    </footer>
+      <div class="footer-col">
+        <h3>Policy</h3>
+        <div class="footer-links">
+          <a href="#">Return Policy</a>
+          <a href="#">Terms of Use</a>
+          <a href="#">Security</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h3>Contact Us</h3>
+        <div class="footer-links">
+          <a href="contact.html">Contact Page</a>
+          <span>Email: support@eshop.com</span>
+          <span>Phone: 1800 202 9898</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 EShop E-Commerce. All Rights Reserved.
+    </div>
+  </footer>
 
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
+
 </html>

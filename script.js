@@ -6,6 +6,30 @@ document.addEventListener('DOMContentLoaded', () => {
   const closeMenuBtn = document.querySelector('.close-menu');
   const mobileLinks = document.querySelectorAll('.mobile-nav-links a');
 
+  // --- Track Order Page Logic ---
+  if (window.location.pathname.includes('track.html')) {
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get('name');
+    const product = params.get('product');
+    const quantity = params.get('qty');
+    const payment = params.get('pay');
+    const address = params.get('addr');
+    const txid = params.get('txid');
+    const img = params.get('img');
+
+    if (name) document.getElementById('trackCustomerName').textContent = name;
+    if (product) document.getElementById('trackProductName').textContent = product;
+    if (quantity) document.getElementById('trackQuantity').textContent = quantity;
+    if (payment) document.getElementById('trackPaymentMethod').textContent = payment;
+    if (address) document.getElementById('trackAddress').textContent = address;
+    if (img) document.getElementById('trackProductImg').src = img;
+    
+    if (txid && txid !== 'undefined' && txid !== '') {
+      document.getElementById('trackTXIDContainer').style.display = 'block';
+      document.getElementById('trackTXID').textContent = txid;
+    }
+  }
+
   function openMenu() {
     mobileMenu.classList.add('active');
     overlay.classList.add('active');
@@ -45,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const card = e.target.closest('.product-card');
       if (card) {
         const productName = card.querySelector('.product-name').textContent.trim();
+        const productImg = card.querySelector('.product-img').src;
         const priceNode = card.querySelector('p');
         let productPrice = "";
         if (priceNode) {
@@ -53,8 +78,8 @@ document.addEventListener('DOMContentLoaded', () => {
           if (delNode) tempP.removeChild(delNode);
           productPrice = tempP.textContent.trim();
         }
-        // Redirect with both product and price
-        window.location.href = `order.html?product=${encodeURIComponent(productName)}&price=${encodeURIComponent(productPrice)}`;
+        // Redirect with product, price, and image
+        window.location.href = `order.html?product=${encodeURIComponent(productName)}&price=${encodeURIComponent(productPrice)}&image=${encodeURIComponent(productImg)}`;
       }
     }
   });
@@ -63,7 +88,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const urlParams = new URLSearchParams(window.location.search);
   const productParam = urlParams.get('product');
   const priceParam = urlParams.get('price');
-  
+  const imageParam = urlParams.get('image');
+
   if (productParam) {
     const productInput = document.getElementById('productName');
     if (productInput) {
@@ -72,14 +98,72 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Display Product Image on Order Page
+  if (imageParam) {
+    const previewDiv = document.getElementById('productPreview');
+    const imgElement = document.getElementById('selectedProductImg');
+    if (previewDiv && imgElement) {
+      imgElement.src = imageParam;
+      previewDiv.style.display = 'block';
+    }
+  }
+
+  // Display Payment QR Code and Address based on selection
+  const paymentSelect = document.getElementById('paymentMethod');
+  const paymentContainer = document.getElementById('paymentImageContainer');
+  const paymentImg = document.getElementById('paymentQR');
+  const paymentAddress = document.getElementById('paymentAddressNote');
+  const cryptoProofFields = document.getElementById('cryptoProofFields');
+
+  if (paymentSelect && paymentContainer && paymentImg && paymentAddress && cryptoProofFields) {
+    paymentSelect.addEventListener('change', () => {
+      const selection = paymentSelect.value;
+      if (selection === 'bitcoin') {
+        paymentImg.src = 'payment/BTC.jpeg';
+        paymentAddress.textContent = 'Address: bc1pu7xhgjvskzc8vt94e83djledla9hnkgmalm0s943r8q86j993uwsldgy0z';
+        paymentContainer.style.display = 'block';
+        cryptoProofFields.style.display = 'block';
+      } else if (selection === 'usdt_trc20') {
+        paymentImg.src = 'payment/Trc20.jpeg';
+        paymentAddress.textContent = 'Address: TLMz1tHMkfmBT1SAmb88DUiXN4UkhnLfQT';
+        paymentContainer.style.display = 'block';
+        cryptoProofFields.style.display = 'block';
+      } else if (selection === 'usdt_erc20') {
+        paymentImg.src = 'payment/ERC20.jpeg';
+        paymentAddress.textContent = 'Address: 0xF3E3396237ff66594Cc0A005120a27A58B7821fa';
+        paymentContainer.style.display = 'block';
+        cryptoProofFields.style.display = 'block';
+      } else {
+        paymentContainer.style.display = 'none';
+        cryptoProofFields.style.display = 'none';
+      }
+    });
+  }
+
   // --- Order Form Submit Logic ---
   const orderForm = document.getElementById('orderForm');
   if (orderForm) {
     orderForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      alert('Order Placed Successfully! Thank you for shopping with us.');
+      const name = document.getElementById('fullName').value;
+      const mobile = document.getElementById('mobileNumber').value;
+      const address = document.getElementById('address').value;
+      const product = document.getElementById('productName').value;
+      const quantity = document.getElementById('quantity').value;
+      const payment = document.getElementById('paymentMethod').options[document.getElementById('paymentMethod').selectedIndex].text;
+      const txid = document.getElementById('transactionId') ? document.getElementById('transactionId').value : '';
+      
+      // Get the product image from the URL params (since it was passed to this page)
+      const currentParams = new URLSearchParams(window.location.search);
+      const productImg = currentParams.get('image') || '';
+
+      // Build the tracking URL
+      const trackUrl = `track.html?name=${encodeURIComponent(name)}&product=${encodeURIComponent(product)}&qty=${encodeURIComponent(quantity)}&pay=${encodeURIComponent(payment)}&addr=${encodeURIComponent(address)}&txid=${encodeURIComponent(txid)}&img=${encodeURIComponent(productImg)}`;
+
+      alert(`Order Confirmed!\n\nThank you, ${name}! Redirecting to your tracking page...`);
+      
       orderForm.reset();
-      window.location.href = 'index.html';
+      window.location.href = trackUrl;
     });
   }
 

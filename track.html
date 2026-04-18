@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Track Your Order - EShop</title>
+  <meta name="description" content="Track your order status and details.">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .track-container {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .status-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .status-badge {
+      display: inline-block;
+      background: #e3f2fd;
+      color: #2874f0;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-weight: 600;
+      margin-top: 0.5rem;
+    }
+
+    .order-summary {
+      display: flex;
+      gap: 2rem;
+      border-top: 1px solid #eee;
+      padding-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .order-image {
+      flex: 1;
+      min-width: 250px;
+      text-align: center;
+    }
+
+    .order-image img {
+      max-width: 100%;
+      border-radius: 12px;
+      box-shadow: var(--shadow-md);
+      max-height: 400px;
+      object-fit: contain;
+    }
+
+    .order-info {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .info-item {
+      margin-bottom: 1rem;
+    }
+
+    .info-label {
+      font-size: 0.9rem;
+      color: #777;
+      margin-bottom: 0.2rem;
+    }
+
+    .info-value {
+      font-weight: 600;
+      color: #333;
+      word-break: break-all;
+    }
+
+    .tracking-timeline {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid #eee;
+    }
+
+    .timeline {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      margin-top: 2rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 15px;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: #eee;
+      z-index: 1;
+    }
+
+    .step {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      flex: 1;
+    }
+
+    .step-icon {
+      width: 35px;
+      height: 35px;
+      background: #eee;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 0.5rem;
+      font-weight: bold;
+      color: #999;
+    }
+
+    .step.active .step-icon {
+      background: #2874f0;
+      color: #fff;
+    }
+
+    .step.active .step-label {
+      color: #2874f0;
+      font-weight: 600;
+    }
+
+    .step-label {
+      font-size: 0.85rem;
+      color: #999;
+    }
+
+    @media (max-width: 600px) {
+      .order-summary {
+        flex-direction: column;
+        align-items: center;
+      }
+      .timeline {
+        flex-direction: column;
+        gap: 2rem;
+        align-items: flex-start;
+        padding-left: 20px;
+      }
+      .timeline::before {
+        width: 4px;
+        height: 100%;
+        left: 35px;
+        top: 0;
+      }
+      .step {
+        display: flex;
+        gap: 1rem;
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header & Navbar -->
+  <header>
+    <div class="container navbar">
+      <a href="index.html" class="logo">E<span>Shop</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="products.html">Our Product</a></li>
+        <li><a href="order.html">Order Now</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu & Overlay -->
+  <div class="overlay"></div>
+  <div class="mobile-menu">
+    <div class="mobile-menu-header">
+      <span class="logo">E<span>Shop</span></span>
+      <span class="close-menu">&times;</span>
+    </div>
+    <ul class="mobile-nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="products.html">Our Product</a></li>
+      <li><a href="order.html">Order Now</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- Track Page Content -->
+  <main class="container">
+    <div class="track-container">
+      <div class="status-header">
+        <h2 style="color: #4caf50;">✔ Order Placed Successfully!</h2>
+        <p>Thank you for shopping with EShop. Your order is being processed.</p>
+        <div class="status-badge">Status: Pending Verification</div>
+      </div>
+
+      <div class="order-summary">
+        <div class="order-image">
+          <img id="trackProductImg" src="images/placeholder.jpg" alt="Product Image">
+        </div>
+        <div class="order-info">
+          <h3>Order Details</h3>
+          <div class="info-item">
+            <div class="info-label">Customer Name</div>
+            <div id="trackCustomerName" class="info-value">-</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Product</div>
+            <div id="trackProductName" class="info-value">-</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Quantity</div>
+            <div id="trackQuantity" class="info-value">-</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Payment Method</div>
+            <div id="trackPaymentMethod" class="info-value">-</div>
+          </div>
+          <div id="trackTXIDContainer" class="info-item" style="display: none;">
+            <div class="info-label">Transaction ID (TXID)</div>
+            <div id="trackTXID" class="info-value">-</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Delivery Address</div>
+            <div id="trackAddress" class="info-value">-</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tracking-timeline">
+        <h3>Estimated Delivery: 3-5 Working Days</h3>
+        <div class="timeline">
+          <div class="step active">
+            <div class="step-icon">1</div>
+            <div class="step-label">Ordered</div>
+          </div>
+          <div class="step">
+            <div class="step-icon">2</div>
+            <div class="step-label">Processing</div>
+          </div>
+          <div class="step">
+            <div class="step-icon">3</div>
+            <div class="step-label">Shipped</div>
+          </div>
+          <div class="step">
+            <div class="step-icon">4</div>
+            <div class="step-label">Delivered</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 3rem;">
+        <a href="index.html" class="btn btn-blue">Continue Shopping</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <a href="index.html" class="logo" style="color: #fff;">E<span>Shop</span></a>
+        <p style="margin-top: 1rem; color: #ddd;">Your trusted destination for quality products and fast delivery.</p>
+      </div>
+      <div class="footer-col">
+        <h3>Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="products.html">Our Product</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Connect With Us</h3>
+        <div class="social-links" style="display: flex; gap: 1rem;">
+          <span>Facebook</span>
+          <span>Instagram</span>
+          <span>Twitter</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container" style="text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem;">
+        <p>&copy; 2024 EShop. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
