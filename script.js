@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (window.location.pathname.includes('track.html')) {
     const params = new URLSearchParams(window.location.search);
     const name = params.get('name');
+    const email = params.get('email');
     const product = params.get('product');
     const quantity = params.get('qty');
     const payment = params.get('pay');
@@ -18,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const img = params.get('img');
 
     if (name) document.getElementById('trackCustomerName').textContent = name;
+    if (email) document.getElementById('trackEmail').textContent = email;
     if (product) document.getElementById('trackProductName').textContent = product;
     if (quantity) document.getElementById('trackQuantity').textContent = quantity;
     if (payment) document.getElementById('trackPaymentMethod').textContent = payment;
@@ -147,6 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       const name = document.getElementById('fullName').value;
       const mobile = document.getElementById('mobileNumber').value;
+      const email = document.getElementById('email').value;
       const address = document.getElementById('address').value;
       const product = document.getElementById('productName').value;
       const quantity = document.getElementById('quantity').value;
@@ -158,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const productImg = currentParams.get('image') || '';
 
       // Build the tracking URL
-      const trackUrl = `track.html?name=${encodeURIComponent(name)}&product=${encodeURIComponent(product)}&qty=${encodeURIComponent(quantity)}&pay=${encodeURIComponent(payment)}&addr=${encodeURIComponent(address)}&txid=${encodeURIComponent(txid)}&img=${encodeURIComponent(productImg)}`;
+      const trackUrl = `track.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&product=${encodeURIComponent(product)}&qty=${encodeURIComponent(quantity)}&pay=${encodeURIComponent(payment)}&addr=${encodeURIComponent(address)}&txid=${encodeURIComponent(txid)}&img=${encodeURIComponent(productImg)}`;
 
       alert(`Order Confirmed!\n\nThank you, ${name}! Redirecting to your tracking page...`);
       
