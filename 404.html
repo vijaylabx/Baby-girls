@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - Page Not Found | EShop</title>
+  <meta name="description" content="Oops! The page you are looking for does not exist.">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .error-section {
+      padding: 100px 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 60vh;
+    }
+
+    .error-code {
+      font-size: 8rem;
+      font-weight: 800;
+      color: var(--primary-blue);
+      line-height: 1;
+      margin-bottom: 10px;
+      text-shadow: 4px 4px 0px rgba(40, 116, 240, 0.1);
+    }
+
+    .error-message {
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 20px;
+    }
+
+    .error-description {
+      font-size: 1.1rem;
+      color: var(--text-gray);
+      margin-bottom: 30px;
+      max-width: 500px;
+    }
+
+    .error-image {
+      max-width: 300px;
+      margin-bottom: 40px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .back-btn {
+      padding: 12px 30px;
+      font-size: 1.1rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header & Navbar -->
+  <header>
+    <div class="container navbar">
+      <a href="index.html" class="logo">E<span>Shop</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="products.html">Our Product</a></li>
+        <li><a href="order.html">Order Now</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu & Overlay -->
+  <div class="overlay"></div>
+  <div class="mobile-menu">
+    <div class="mobile-menu-header">
+      <span class="logo">E<span>Shop</span></span>
+      <span class="close-menu">&times;</span>
+    </div>
+    <ul class="mobile-nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="products.html">Our Product</a></li>
+      <li><a href="order.html">Order Now</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- Error Content -->
+  <main class="container">
+    <section class="error-section">
+      <div class="error-code">404</div>
+      <h1 class="error-message">Oops! Page Not Found</h1>
+      <p class="error-description">
+        The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.
+      </p>
+      <a href="index.html" class="btn back-btn">Return to Homepage</a>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <h3>About</h3>
+        <div class="footer-links">
+          <a href="about.html">About Us</a>
+          <a href="about.html">Careers</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h3>Help</h3>
+        <div class="footer-links">
+          <a href="order.html">Payments</a>
+          <a href="order.html">Shipping</a>
+          <a href="order.html">Cancellation & Returns</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h3>Policy</h3>
+        <div class="footer-links">
+          <a href="index.html">Return Policy</a>
+          <a href="index.html">Terms of Use</a>
+          <a href="index.html">Security</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h3>Contact Us</h3>
+        <div class="footer-links">
+          <a href="contact.html">Contact Page</a>
+          <span>Email: support@eshop.com</span>
+          <span>Phone: 1800 202 9898</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 EShop E-Commerce. All Rights Reserved.
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
